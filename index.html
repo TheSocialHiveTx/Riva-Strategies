@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riva Strategies | Multi-Disciplinary Business Growth Partner</title>
+    <meta name="description" content="Positioning business owners for sustainable growth through systemic operational excellence.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --riva-blue: #0A2F73;
+            --riva-gold: #C9A24D;
+            --riva-gold-dark: #B08A3C;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        .text-riva-blue { color: var(--riva-blue); }
+        .bg-riva-blue { background-color: var(--riva-blue); }
+        .text-riva-gold { color: var(--riva-gold); }
+        .bg-riva-gold { background-color: var(--riva-gold); }
+        .border-riva-gold { border-color: var(--riva-gold); }
+        
+        /* Animations */
+        @keyframes page-entrance {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-entrance {
+            animation: page-entrance 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        /* UI Elements */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .gold-glow:hover {
+            box-shadow: 0 20px 40px -15px rgba(201, 162, 77, 0.25);
+            transform: translateY(-6px);
+        }
+        .selection-gold::selection {
+            background: var(--riva-gold);
+            color: var(--riva-blue);
+        }
+
+        /* Virtual Routing Logic */
+        .page-content { display: none; }
+        .page-content.active { display: block; }
+        
+        /* Smooth Form Styles */
+        .form-input {
+            background-color: #FFFFFF !important;
+            border: 2px solid #E5E7EB;
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: var(--riva-gold);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(201, 162, 77, 0.1);
+        }
+
+        /* Nav underline effect */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--riva-gold);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0"
+  }
+}
+</script>
+</head>
+<body class="bg-white text-gray-800 antialiased selection-gold">
+
+    <!-- NAVIGATION -->
+    <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300 py-5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center group">
+                    <span class="text-2xl font-black tracking-tighter text-riva-blue">
+                        RIVA<span class="font-light tracking-widest text-riva-gold ml-1">STRATEGIES</span>
+                    </span>
+                </a>
+                <nav class="hidden md:flex space-x-10 items-center">
+                    <a href="#" class="nav-link text-sm font-semibold tracking-wide text-gray-500 hover:text-riva-blue">Home</a>
+                    <a href="#services" class="nav-link text-sm font-semibold tracking-wide text-gray-500 hover:text-riva-blue">Services</a>
+                    <a href="#industries" class="nav-link text-sm font-semibold tracking-wide text-gray-500 hover:text-riva-blue">Industries</a>
+                    <a href="#contact" class="px-6 py-3 rounded-sm text-xs font-bold uppercase tracking-widest bg-riva-gold text-riva-blue hover:bg-riva-gold-dark shadow-md transition-all">Book Strategy Call</a>
+                </nav>
+                <button class="md:hidden text-riva-blue" id="mobile-menu-btn">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m4 6h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU (HIDDEN BY DEFAULT) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="p-6">
+            <div class="flex justify-end"><button id="close-menu-btn"><svg class="w-8 h-8 text-riva-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div>
+            <div class="mt-12 space-y-8 text-center">
+                <a href="#" class="block text-2xl font-black text-riva-blue">Home</a>
+                <a href="#services" class="block text-2xl font-black text-riva-blue">Services</a>
+                <a href="#industries" class="block text-2xl font-black text-riva-blue">Industries</a>
+                <a href="#contact" class="block px-6 py-4 bg-riva-gold text-riva-blue rounded-sm font-black text-xs uppercase tracking-widest">Book Strategy Call</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN WRAPPER -->
+    <div id="app-container">
+        
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page-content active animate-entrance">
+            <!-- Hero -->
+            <section class="relative pt-48 pb-40 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="text-center md:text-left max-w-4xl">
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50/50 border border-blue-100 text-riva-blue text-[10px] font-black uppercase tracking-[0.25em] mb-10">
+                            Growth Architecture & Systems
+                        </div>
+                        <h1 class="text-5xl md:text-8xl font-black text-riva-blue leading-[1.05] tracking-tight">
+                            We Build <br />
+                            <span class="text-riva-gold italic font-serif">Valuable</span> Companies.
+                        </h1>
+                        <p class="mt-10 text-xl md:text-2xl text-gray-500 leading-relaxed max-w-2xl font-light">
+                            Riva Strategies transforms operator-dependent businesses into high-performance, system-led assets.
+                        </p>
+                        <div class="mt-14 flex flex-col sm:flex-row items-center gap-6">
+                            <a href="#contact" class="w-full sm:w-auto px-10 py-5 bg-riva-gold text-riva-blue rounded-sm font-black text-xs uppercase tracking-[0.2em] shadow-2xl hover:bg-riva-gold-dark hover:scale-105 transition-all text-center">
+                                Book Growth Audit
+                            </a>
+                            <a href="#services" class="w-full sm:w-auto px-10 py-5 border-2 border-riva-blue text-riva-blue rounded-sm font-black text-xs uppercase tracking-[0.2em] hover:bg-blue-50 transition-all text-center">
+                                Our Methodology
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 w-2/5 h-full hidden lg:block overflow-hidden pointer-events-none">
+                    <div class="absolute top-20 right-[-100px] w-[600px] h-[600px] border-[40px] border-riva-blue/5 rounded-full"></div>
+                </div>
+            </section>
+
+            <!-- Stats -->
+            <section class="bg-riva-blue py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center items-center">
+                        <div>
+                            <div class="text-3xl md:text-5xl font-black text-riva-gold">$100M+</div>
+                            <div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200/50 mt-4">Managed Pipeline</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-5xl font-black text-riva-gold">42%</div>
+                            <div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200/50 mt-4">Avg Efficiency Lift</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-5xl font-black text-riva-gold">250+</div>
+                            <div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200/50 mt-4">Systems Deployed</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl md:text-5xl font-black text-riva-gold">10+</div>
+                            <div class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-200/50 mt-4">Core Verticals</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Overview -->
+            <section id="services-preview" class="py-32 bg-gray-50/50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                        <div class="max-w-2xl">
+                            <h2 class="text-xs font-black uppercase tracking-[0.3em] text-riva-gold mb-6">Execution Pillars</h2>
+                            <h3 class="text-4xl md:text-5xl font-black text-riva-blue leading-tight tracking-tight">The Architecture of Scale</h3>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-white p-10 rounded-sm border border-gray-100 gold-glow transition-all">
+                            <div class="text-4xl mb-8">📈</div>
+                            <h4 class="text-xl font-bold text-riva-blue mb-4">Revenue Systems</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-8">Predictable sales machines that turn leads into loyal customers without owner intervention.</p>
+                        </div>
+                        <div class="bg-white p-10 rounded-sm border border-gray-100 gold-glow transition-all">
+                            <div class="text-4xl mb-8">⚙️</div>
+                            <h4 class="text-xl font-bold text-riva-blue mb-4">Operational Efficiency</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-8">Auditing and rebuilding workflows to remove bottlenecks and optimize your tech stack.</p>
+                        </div>
+                        <div class="bg-white p-10 rounded-sm border border-gray-100 gold-glow transition-all">
+                            <div class="text-4xl mb-8">🗺️</div>
+                            <h4 class="text-xl font-bold text-riva-blue mb-4">Strategic Planning</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-8">Long-term roadmaps based on hard data, defining the "Where" and the "How" for growth.</p>
+                        </div>
+                        <div class="bg-white p-10 rounded-sm border border-gray-100 gold-glow transition-all">
+                            <div class="text-4xl mb-8">🤝</div>
+                            <h4 class="text-xl font-bold text-riva-blue mb-4">Team Performance</h4>
+                            <p class="text-gray-500 text-sm leading-relaxed mb-8">Incentive structures that align your team’s output with your company’s growth goals.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Industries Showcase -->
+            <section id="industries" class="py-32 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-24">
+                        <h2 class="text-xs font-black uppercase tracking-[0.3em] text-riva-gold mb-6">Vertical Expertise</h2>
+                        <h3 class="text-4xl md:text-5xl font-black text-riva-blue tracking-tight leading-tight">Built for Your Reality</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="industry-grid">
+                        <!-- Content generated by JS below for brevity and easy maintenance -->
+                    </div>
+                    <div class="mt-20 text-center">
+                        <a href="#industries-all" class="inline-flex items-center px-10 py-5 border-2 border-riva-blue text-riva-blue rounded-sm font-black text-xs uppercase tracking-[0.2em] hover:bg-riva-blue hover:text-white transition-all">
+                           Explore All Industries
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final CTA -->
+            <section id="contact" class="py-32 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row gap-20">
+                        <div class="lg:w-5/12">
+                            <h2 class="text-xs font-black uppercase tracking-[0.3em] text-riva-gold mb-6">Engagement</h2>
+                            <h3 class="text-5xl font-black text-riva-blue tracking-tighter leading-tight mb-8">Apply for Growth Strategy.</h3>
+                            <p class="text-xl text-gray-500 font-light leading-relaxed mb-10">Limited availability per quarter. We only partner with operators ready for systemic transformation.</p>
+                            <div class="space-y-8">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-white border border-gray-100 flex items-center justify-center mr-4 text-riva-blue">✔</div>
+                                    <span class="font-bold text-riva-blue">30-Min Principal Review</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-white border border-gray-100 flex items-center justify-center mr-4 text-riva-blue">✔</div>
+                                    <span class="font-bold text-riva-blue">12-Hour Priority Response</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-7/12">
+                            <div class="bg-white p-10 md:p-16 rounded-sm shadow-xl border border-gray-100">
+                                <form id="contact-form" class="space-y-10">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                        <div class="group">
+                                            <label class="block text-[10px] font-black text-riva-blue uppercase tracking-[0.2em] mb-3 group-focus-within:text-riva-gold">First Name</label>
+                                            <input type="text" class="form-input w-full px-5 py-4 rounded-sm" placeholder="John" required>
+                                        </div>
+                                        <div class="group">
+                                            <label class="block text-[10px] font-black text-riva-blue uppercase tracking-[0.2em] mb-3 group-focus-within:text-riva-gold">Last Name</label>
+                                            <input type="text" class="form-input w-full px-5 py-4 rounded-sm" placeholder="Doe" required>
+                                        </div>
+                                    </div>
+                                    <div class="group">
+                                        <label class="block text-[10px] font-black text-riva-blue uppercase tracking-[0.2em] mb-3 group-focus-within:text-riva-gold">Business Email</label>
+                                        <input type="email" class="form-input w-full px-5 py-4 rounded-sm" placeholder="john@company.com" required>
+                                    </div>
+                                    <div class="group">
+                                        <label class="block text-[10px] font-black text-riva-blue uppercase tracking-[0.2em] mb-3 group-focus-within:text-riva-gold">Current Bottleneck</label>
+                                        <textarea rows="4" class="form-input w-full px-5 py-4 rounded-sm" placeholder="What is preventing your next phase of growth?"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full py-6 bg-riva-gold text-riva-blue rounded-sm font-black text-xs uppercase tracking-[0.3em] shadow-xl hover:bg-riva-gold-dark transition-all">
+                                        Request Strategy Audit
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- DYNAMIC INDUSTRY DETAIL PAGE (Rendered via hash change) -->
+        <div id="page-industry-detail" class="page-content animate-entrance">
+            <!-- Content injected via JS based on industrySlug -->
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-riva-blue text-white pt-24 pb-12 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                <div class="md:col-span-6">
+                    <span class="text-2xl font-bold tracking-tighter">
+                        RIVA<span class="font-light tracking-widest text-riva-gold ml-1">STRATEGIES</span>
+                    </span>
+                    <p class="mt-6 text-blue-100/70 text-base leading-relaxed max-w-md">
+                        Architecting sustainable growth for high-ambition operators through systemic operational excellence.
+                    </p>
+                </div>
+                <div class="md:col-span-6 flex justify-center md:justify-end items-center">
+                    <a href="#contact" class="px-8 py-4 border border-riva-gold text-riva-gold font-bold text-xs uppercase tracking-widest hover:bg-riva-gold hover:text-riva-blue transition-all">Start Your Audit Today</a>
+                </div>
+            </div>
+            <div class="mt-20 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                <p>© 2024 Riva Strategies Group. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-8">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE -->
+    <script>
+        const INDUSTRIES = [
+            { id: '1', name: 'Hospitality & Food Service', slug: 'hospitality', icon: '🍴', short: 'Scaling operational excellence in high-volume environments.', different: 'Hospitality operates on razor-thin margins where pennies matter.', problems: ['Rising labor costs', 'Inconsistent guest experiences', 'Fragmented tech stacks'], systems: 'Riva installs inventory management protocols and labor optimization frameworks.' },
+            { id: '2', name: 'Local & Field Services', slug: 'local-services', icon: '🛠', short: 'Converting service technicians into revenue drivers.', different: 'Success depends on dispatch efficiency and lead-to-close speed.', problems: ['Inefficient dispatching', 'Low lead booking rates', 'Retention of skilled labor'], systems: 'We deploy CRM automation and dispatch optimization systems.' },
+            { id: '3', name: 'Professional Services', slug: 'professional-services', icon: '⚖', short: 'Transitioning from billable-hour dependency to scale.', different: 'The product is expertise. Scaling requires decoupling revenue from individual hours.', problems: ['Revenue plateaus', 'Inconsistent lead flow', 'High admin burden'], systems: 'We implement high-authority marketing funnels and project trackers.' },
+            { id: '4', name: 'Retail & E-Commerce', slug: 'retail', icon: '🛍', short: 'Bridging physical storefronts and digital scale.', different: 'Retail requires omni-channel synchronization.', problems: ['Inventory bloat', 'High acquisition costs', 'Low repeat rates'], systems: 'Riva optimizes inventory turnover and builds retention loops.' },
+            { id: '5', name: 'Real Estate & Development', slug: 'real-estate', icon: '🏗', short: 'Streamlining complex project lifecycles.', different: 'Capital intensive with long lead times.', problems: ['Pipeline breakdowns', 'Manual reporting', 'Slow inquiry response'], systems: 'We build institutional-grade communication and tracking systems.' },
+            { id: '6', name: 'Healthcare & Medical', slug: 'healthcare', icon: '🏥', short: 'Patient-centric operations designed for profit.', different: 'Must balance care quality with insurance and compliance.', problems: ['Billing overhead', 'Patient no-shows', 'Multi-clinic scaling'], systems: 'Riva implements automated scheduling and billing follow-ups.' },
+            { id: '7', name: 'Technology & Software', slug: 'tech', icon: '💻', short: 'Accelerating growth through scalable sales engines.', different: 'The focus is on MRR and churn.', problems: ['High churn', 'Sales misalignment', 'Scaling customer success'], systems: 'We architect sales-led and product-led growth systems.' },
+            { id: '8', name: 'Manufacturing & Logistics', slug: 'logistics', icon: '🚛', short: 'Modernizing legacy operations for the supply chain.', different: 'Relies on tight feedback loops between sales and production.', problems: ['Inventory lag', 'Lead time unpredictability', 'Legacy software'], systems: 'Riva streamlines the Order-to-Cash cycle with modern ERP.' },
+            { id: '9', name: 'Financial Services', slug: 'finance', icon: '💰', short: 'Building trust through automated authority.', different: 'Highly regulated and trust-based.', problems: ['Compliance barriers', 'Crowded market', 'Manual onboarding'], systems: 'We deploy Education-First marketing and automated onboarding.' },
+            { id: '10', name: 'Non-Profit & Education', slug: 'non-profit', icon: '🎓', short: 'Mission-driven growth with business efficiency.', different: 'Success measured by impact and funding consistency.', problems: ['Unpredictable cycles', 'Manual fundraising', 'Fragmented data'], systems: 'Riva builds automated donor journey and enrollment systems.' }
+        ];
+
+        // 1. Render Industry Grid
+        const grid = document.getElementById('industry-grid');
+        INDUSTRIES.forEach((ind, i) => {
+            const card = document.createElement('a');
+            card.href = `#${ind.slug}`;
+            card.className = "group relative bg-white overflow-hidden border border-gray-100 p-12 gold-glow transition-all duration-500";
+            card.innerHTML = `
+                <div class="relative z-10">
+                    <div class="text-4xl text-riva-blue mb-8 group-hover:scale-110 transition-all">${ind.icon}</div>
+                    <h4 class="text-2xl font-black text-riva-blue mb-4 tracking-tight">${ind.name}</h4>
+                    <p class="text-gray-500 text-sm mb-10 leading-relaxed">${ind.short}</p>
+                    <div class="text-[10px] font-black uppercase tracking-[0.2em] text-riva-gold flex items-center group-hover:translate-x-2 transition-all">
+                      View Vertical Solutions →
+                    </div>
+                </div>
+                <div class="absolute -bottom-8 -right-8 text-9xl font-black text-gray-50 select-none group-hover:text-riva-gold/5 transition-colors duration-500">0${i+1}</div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // 2. Simple Routing System
+        function handleRouting() {
+            const hash = window.location.hash.replace('#', '');
+            const pages = document.querySelectorAll('.page-content');
+            const detailPage = document.getElementById('page-industry-detail');
+            const industry = INDUSTRIES.find(i => i.slug === hash);
+
+            // Hide all pages
+            pages.forEach(p => p.classList.remove('active'));
+
+            if (industry) {
+                // Show Detail Page
+                detailPage.innerHTML = `
+                    <section class="bg-riva-blue text-white pt-48 pb-32 overflow-hidden relative">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <div class="max-w-4xl">
+                                <div class="text-6xl mb-10">${industry.icon}</div>
+                                <h1 class="text-5xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
+                                    The <span class="text-riva-gold italic font-serif">Future</span> of <br>${industry.name}.
+                                </h1>
+                                <p class="text-xl md:text-2xl text-blue-100/70 leading-relaxed mb-12 font-light max-w-2xl">${industry.short}</p>
+                                <div class="flex flex-col sm:flex-row gap-6">
+                                    <a href="#contact" class="px-10 py-5 bg-riva-gold text-riva-blue rounded-sm font-black text-xs uppercase tracking-widest text-center">Request ${industry.name} Audit</a>
+                                    <a href="#" class="px-10 py-5 border border-white/20 text-white rounded-sm font-black text-xs uppercase tracking-widest text-center">Back to Home</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="py-32 bg-white">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="flex flex-col lg:flex-row gap-24 items-center">
+                                <div class="lg:w-1/2">
+                                    <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-riva-gold mb-6">Vertical Dynamics</h2>
+                                    <h3 class="text-4xl md:text-5xl font-black text-riva-blue mb-8 tracking-tighter">Why This Sector is Different</h3>
+                                    <p class="text-lg text-gray-500 leading-relaxed font-light mb-12">${industry.different}</p>
+                                    <div class="bg-blue-50/50 p-10 rounded-sm border border-blue-100">
+                                        <h4 class="text-xl font-bold text-riva-blue mb-3">Our Core System</h4>
+                                        <p class="text-gray-500 text-sm leading-relaxed italic">${industry.systems}</p>
+                                    </div>
+                                </div>
+                                <div class="lg:w-1/2">
+                                    <div class="bg-riva-blue p-12 rounded-sm shadow-2xl">
+                                        <h3 class="text-2xl font-black text-white mb-12">Primary Bottlenecks We Solve</h3>
+                                        <ul class="space-y-8">
+                                            ${industry.problems.map((p, i) => `
+                                                <li class="flex items-start">
+                                                    <div class="w-8 h-8 rounded-sm bg-white/10 text-riva-gold flex items-center justify-center flex-shrink-0 mr-6 font-black text-xs">0${i+1}</div>
+                                                    <p class="text-blue-50 font-bold text-lg leading-tight">${p}</p>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                `;
+                detailPage.classList.add('active');
+            } else {
+                // Show Home Page
+                document.getElementById('page-home').classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('hashchange', handleRouting);
+        window.addEventListener('load', handleRouting);
+
+        // 3. Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 20) {
+                header.classList.add('glass-header', 'shadow-lg', 'py-3');
+                header.classList.remove('bg-transparent', 'py-5');
+            } else {
+                header.classList.remove('glass-header', 'shadow-lg', 'py-3');
+                header.classList.add('bg-transparent', 'py-5');
+            }
+        });
+
+        // 4. Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+        document.getElementById('close-menu-btn').addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        }));
+
+        // 5. Form Submission Placeholder
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Audit request received. A principal will contact you within 12 hours.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
