@@ -80,6 +80,11 @@
             visibility: hidden;
             display: flex; /* keep it flex but invisible to allow transition */
         }
+        .modal-card {
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 <script type="importmap">
 {
@@ -128,11 +133,12 @@
 
     <!-- SERVICE DETAIL MODAL -->
     <div id="service-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-riva-blue/40 backdrop-blur-sm">
-        <div class="bg-white w-full max-w-2xl rounded-sm shadow-2xl relative overflow-hidden animate-page-entrance">
-            <button onclick="closeServiceModal()" class="absolute top-6 right-6 text-gray-400 hover:text-riva-blue transition-colors z-10">
-                <i data-lucide="x" class="w-6 h-6"></i>
+        <div class="bg-white w-full max-w-2xl rounded-sm shadow-2xl relative animate-page-entrance modal-card">
+            <!-- Fixed Close Button for Sticky feel on mobile -->
+            <button onclick="closeServiceModal()" class="sticky top-0 float-right p-4 bg-white/80 backdrop-blur-sm text-gray-400 hover:text-riva-blue transition-colors z-[110] rounded-bl-sm">
+                <i data-lucide="x" class="w-7 h-7"></i>
             </button>
-            <div id="modal-body" class="p-8 md:p-12">
+            <div id="modal-body" class="p-6 md:p-12 clear-both">
                 <!-- Content injected by JS -->
             </div>
         </div>
@@ -264,23 +270,23 @@
             const body = document.getElementById('modal-body');
             
             body.innerHTML = `
-                <div class="flex items-center mb-8">
-                    <div class="text-6xl mr-6">${service.icon}</div>
+                <div class="flex flex-col md:flex-row md:items-center mb-8 gap-4 md:gap-6">
+                    <div class="text-6xl">${service.icon}</div>
                     <div>
-                        <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-riva-gold mb-2">Service Deep Dive</h4>
+                        <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-riva-gold mb-1">Service Deep Dive</h4>
                         <h2 class="text-3xl font-black text-riva-blue tracking-tight">${service.title}</h2>
                     </div>
                 </div>
                 <p class="text-gray-500 text-lg leading-relaxed font-light mb-10">
                     ${service.detailed}
                 </p>
-                <div class="bg-gray-50 p-8 rounded-sm border border-gray-100 mb-10">
+                <div class="bg-gray-50 p-6 md:p-8 rounded-sm border border-gray-100 mb-10">
                     <h4 class="text-xs font-black uppercase tracking-widest text-riva-blue mb-6">Key Implementation Areas</h4>
                     <ul class="space-y-4">
                         ${service.bullets.map(b => `
-                            <li class="flex items-center text-gray-600 font-medium">
-                                <div class="w-1.5 h-1.5 bg-riva-gold rounded-full mr-4"></div>
-                                ${b}
+                            <li class="flex items-start text-gray-600 font-medium leading-tight">
+                                <div class="w-1.5 h-1.5 bg-riva-gold rounded-full mr-4 mt-2 flex-shrink-0"></div>
+                                <span>${b}</span>
                             </li>
                         `).join('')}
                     </ul>
@@ -500,7 +506,7 @@
                                         <div class="text-6xl mb-10">${s.icon}</div>
                                         <h2 class="text-4xl font-black text-riva-blue mb-6 tracking-tight">${s.title}</h2>
                                         <p class="text-gray-500 text-lg leading-relaxed font-light mb-10">${s.description}</p>
-                                        <button onclick="openServiceModal(${s.id})" class="text-[10px] font-black uppercase tracking-widest text-riva-gold flex items-center hover:text-riva-blue transition-colors">
+                                        <button onclick="openServiceModal(${s.id})" class="text-[10px] font-black uppercase tracking-widest text-riva-gold flex items-center hover:text-riva-blue transition-colors outline-none">
                                             Deep Dive Into ${s.title} <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
                                         </button>
                                     </div>
@@ -547,6 +553,10 @@
         };
 
         const handleRoute = () => {
+            // Auto-close mobile nav on navigation
+            const mobileNav = document.getElementById('mobile-nav');
+            if (mobileNav) mobileNav.classList.add('hidden');
+
             const hash = window.location.hash.replace('#', '');
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.toggle('active', link.getAttribute('data-route') === hash.split('/')[0]);
