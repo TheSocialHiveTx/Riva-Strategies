@@ -70,6 +70,16 @@
 
         /* Routing Utilities */
         #page-content { min-height: 80vh; }
+
+        /* Modal Styles */
+        #service-modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        #service-modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+            display: flex; /* keep it flex but invisible to allow transition */
+        }
     </style>
 <script type="importmap">
 {
@@ -82,7 +92,7 @@
 }
 </script>
 </head>
-<body class="bg-white text-gray-800 antialiased selection-gold">
+<body class="bg-white text-gray-800 antialiased selection-gold overflow-x-hidden">
 
     <!-- HEADER -->
     <header id="main-header" class="fixed w-full top-0 z-50 transition-all duration-300 py-5">
@@ -115,6 +125,18 @@
 
     <!-- PAGE CONTENT -->
     <main id="page-content" class="flex-grow pt-20"></main>
+
+    <!-- SERVICE DETAIL MODAL -->
+    <div id="service-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6 bg-riva-blue/40 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-2xl rounded-sm shadow-2xl relative overflow-hidden animate-page-entrance">
+            <button onclick="closeServiceModal()" class="absolute top-6 right-6 text-gray-400 hover:text-riva-blue transition-colors z-10">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="modal-body" class="p-8 md:p-12">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="bg-riva-blue text-white pt-24 pb-12 overflow-hidden relative">
@@ -201,11 +223,98 @@
         ];
 
         const SERVICES = [
-            { title: 'Revenue Systems', description: 'We build predictable sales and marketing machines that turn cold leads into loyal customers without owner intervention.', icon: '📈' },
-            { title: 'Operational Efficiency', description: 'We audit and rebuild your workflows, removing bottlenecks and implementing the right tech stack for your specific stage.', icon: '⚙️' },
-            { title: 'Strategic Planning', description: 'Long-term roadmaps based on hard data, not gut feelings. We help you define the "Where" and the "How" for the next 3-5 years.', icon: '🗺️' },
-            { title: 'Team Performance', description: 'Leadership training and incentive structures that align your team’s output with your company’s growth goals.', icon: '🤝' }
+            { 
+                id: 0,
+                title: 'Revenue Systems', 
+                description: 'We build predictable sales and marketing machines that turn cold leads into loyal customers without owner intervention.', 
+                icon: '📈',
+                detailed: 'Your revenue should not depend on the owner\'s personality or a handful of heroic employees. We architect multi-channel systems that treat customer acquisition as a predictable manufacturing process.',
+                bullets: ['CRM Automation & Lead Scoring', 'Authority-Driven Content Funnels', 'Performance-Based Paid Acquisition', 'Automated Referral & Retention Loops']
+            },
+            { 
+                id: 1,
+                title: 'Operational Efficiency', 
+                description: 'We audit and rebuild your workflows, removing bottlenecks and implementing the right tech stack for your specific stage.', 
+                icon: '⚙️',
+                detailed: 'Scale is only possible when your operations can handle volume without breaking. We eliminate manual "firefighting" by documenting and automating the core processes of your business.',
+                bullets: ['End-to-End Workflow Mapping', 'Tech Stack Integration & Optimization', 'SOP Documentation & Training Protocols', 'Unit Economic & Margin Visibility']
+            },
+            { 
+                id: 2,
+                title: 'Strategic Planning', 
+                description: 'Long-term roadmaps based on hard data, not gut feelings. We help you define the "Where" and the "How" for the next 3-5 years.', 
+                icon: '🗺️',
+                detailed: 'Most businesses operate without a true North Star. We develop data-driven strategic maps that align every dollar spent and every hour worked with your ultimate exit or expansion goals.',
+                bullets: ['Competitive Market Analysis', '3-Year Financial Modeling', 'Quarterly Execution Frameworks', 'Succession & Exit Readiness Planning']
+            },
+            { 
+                id: 3,
+                title: 'Team Performance', 
+                description: 'Leadership training and incentive structures that align your team’s output with your company’s growth goals.', 
+                icon: '🤝',
+                detailed: 'Company culture is defined by what you tolerate and what you reward. We help you build a high-performance team that thinks like owners, driven by clear KPIs and aligned incentives.',
+                bullets: ['Departmental KPI Dashboards', 'Incentive & Compensation Design', 'Leadership Coaching & Accountability', 'Predictable Talent Acquisition Systems']
+            }
         ];
+
+        // MODAL LOGIC
+        function openServiceModal(id) {
+            const service = SERVICES.find(s => s.id === id);
+            const modal = document.getElementById('service-modal');
+            const body = document.getElementById('modal-body');
+            
+            body.innerHTML = `
+                <div class="flex items-center mb-8">
+                    <div class="text-6xl mr-6">${service.icon}</div>
+                    <div>
+                        <h4 class="text-[10px] font-black uppercase tracking-[0.3em] text-riva-gold mb-2">Service Deep Dive</h4>
+                        <h2 class="text-3xl font-black text-riva-blue tracking-tight">${service.title}</h2>
+                    </div>
+                </div>
+                <p class="text-gray-500 text-lg leading-relaxed font-light mb-10">
+                    ${service.detailed}
+                </p>
+                <div class="bg-gray-50 p-8 rounded-sm border border-gray-100 mb-10">
+                    <h4 class="text-xs font-black uppercase tracking-widest text-riva-blue mb-6">Key Implementation Areas</h4>
+                    <ul class="space-y-4">
+                        ${service.bullets.map(b => `
+                            <li class="flex items-center text-gray-600 font-medium">
+                                <div class="w-1.5 h-1.5 bg-riva-gold rounded-full mr-4"></div>
+                                ${b}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button onclick="window.location.hash='contact'; closeServiceModal();" class="flex-grow px-8 py-5 bg-riva-blue text-white rounded-sm font-black text-xs uppercase tracking-widest hover:bg-riva-blue/90 transition-all text-center">
+                        Request ${service.title} Audit
+                    </button>
+                    <button onclick="closeServiceModal()" class="px-8 py-5 border-2 border-gray-100 text-gray-400 rounded-sm font-black text-xs uppercase tracking-widest hover:bg-gray-50 transition-all">
+                        Close
+                    </button>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('service-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeServiceModal();
+        });
+
+        // Close modal on click outside
+        document.getElementById('service-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'service-modal') closeServiceModal();
+        });
 
         // ROUTER & RENDERING
         const pageContent = document.getElementById('page-content');
@@ -260,11 +369,13 @@
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                                 ${SERVICES.map(s => `
-                                    <div class="bg-white p-10 rounded-sm border border-gray-100 gold-glow transition-all group">
+                                    <div class="bg-white p-10 rounded-sm border border-gray-100 shadow-sm gold-glow transition-all group cursor-default">
                                         <div class="text-4xl mb-8">${s.icon}</div>
                                         <h4 class="text-xl font-bold text-riva-blue mb-4">${s.title}</h4>
                                         <p class="text-gray-500 text-sm leading-relaxed mb-8">${s.description}</p>
-                                        <a href="#services" class="text-[10px] font-black uppercase tracking-widest text-riva-gold flex items-center">Learn More <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i></a>
+                                        <button onclick="openServiceModal(${s.id})" class="text-[10px] font-black uppercase tracking-widest text-riva-gold flex items-center group-hover:text-riva-blue transition-colors outline-none">
+                                            Learn More <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                                        </button>
                                     </div>
                                 `).join('')}
                             </div>
@@ -325,6 +436,24 @@
                             </div>
                         </div>
                     </section>
+
+                    <section class="py-24 bg-gray-50/50 border-b border-gray-100">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="mb-12">
+                                <h2 class="text-[10px] font-black uppercase tracking-[0.3em] text-riva-gold mb-6">Vertical Focus</h2>
+                                <h3 class="text-3xl font-black text-riva-blue tracking-tight">Core Sub-Industries We Serve</h3>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${industry.subSectors.map(sub => `
+                                    <div class="bg-white p-6 border border-gray-100 flex items-center group hover:border-riva-gold transition-all">
+                                        <div class="w-1.5 h-6 bg-riva-gold mr-4 group-hover:h-8 transition-all"></div>
+                                        <span class="text-riva-blue font-bold tracking-tight">${sub}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </section>
+
                     <section class="py-32 bg-white">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-24 items-center">
                             <div>
@@ -371,6 +500,9 @@
                                         <div class="text-6xl mb-10">${s.icon}</div>
                                         <h2 class="text-4xl font-black text-riva-blue mb-6 tracking-tight">${s.title}</h2>
                                         <p class="text-gray-500 text-lg leading-relaxed font-light mb-10">${s.description}</p>
+                                        <button onclick="openServiceModal(${s.id})" class="text-[10px] font-black uppercase tracking-widest text-riva-gold flex items-center hover:text-riva-blue transition-colors">
+                                            Deep Dive Into ${s.title} <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                                        </button>
                                     </div>
                                     <div class="lg:w-1/2 flex items-center">
                                         <div class="space-y-6">
@@ -384,6 +516,7 @@
                     </section>
                 </div>
             `;
+            lucide.createIcons();
         };
 
         const renderContact = () => {
