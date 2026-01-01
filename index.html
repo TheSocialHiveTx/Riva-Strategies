@@ -3,292 +3,186 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebSite",
-      "@id": "https://YOURDOMAIN.com/#website",
-      "url": "https://YOURDOMAIN.com/",
-      "name": "Riva Strategies",
-      "description": "Multi-Disciplinary Business Growth Partner. Architecting sustainable growth through systemic operational excellence.",
-      "publisher": { "@id": "https://YOURDOMAIN.com/#organization" },
-      "inLanguage": "en",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://YOURDOMAIN.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-
-    {
-      "@type": "WebPage",
-      "@id": "https://YOURDOMAIN.com/#webpage",
-      "url": "https://YOURDOMAIN.com/",
-      "name": "Riva Strategies | Multi-Disciplinary Business Growth Partner",
-      "isPartOf": { "@id": "https://YOURDOMAIN.com/#website" },
-      "about": { "@id": "https://YOURDOMAIN.com/#organization" },
-      "primaryImageOfPage": {
-        "@type": "ImageObject",
-        "@id": "https://YOURDOMAIN.com/#primaryimage",
-        "url": "https://YOURDOMAIN.com/images/Untitled%20Design%20-%201%20-%20Edited.png",
-        "caption": "Riva Strategies logo"
-      },
-      "breadcrumb": { "@id": "https://YOURDOMAIN.com/#breadcrumb" },
-      "inLanguage": "en"
-    },
-
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://YOURDOMAIN.com/#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://YOURDOMAIN.com/"
-        }
-      ]
-    },
-
-    {
       "@type": "Organization",
-      "@id": "https://YOURDOMAIN.com/#organization",
+      "@id": "https://rivastrategies.com/#organization",
       "name": "Riva Strategies",
-      "url": "https://YOURDOMAIN.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "@id": "https://YOURDOMAIN.com/#logo",
-        "url": "https://YOURDOMAIN.com/images/Untitled%20Design%20-%201%20-%20Edited.png",
-        "width": 800,
-        "height": 800
-      },
+      "legalName": "Riva Strategies, LLC.",
+      "url": "https://rivastrategies.com/",
       "telephone": "+1-832-388-4600",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "League City",
+        "addressRegion": "TX",
+        "postalCode": "77573",
+        "addressCountry": "US"
+      },
       "sameAs": [
-        "https://www.linkedin.com/company/YOURHANDLE",
-        "https://x.com/YOURHANDLE"
+        "https://www.facebook.com/rivastrategies"
       ],
       "contactPoint": [
         {
           "@type": "ContactPoint",
           "contactType": "sales",
           "telephone": "+1-832-388-4600",
-          "availableLanguage": ["en"],
-          "areaServed": "US"
+          "areaServed": "US",
+          "availableLanguage": ["en"]
         }
       ]
     },
 
     {
       "@type": "LocalBusiness",
-      "@id": "https://YOURDOMAIN.com/#localbusiness",
+      "@id": "https://rivastrategies.com/#localbusiness",
       "name": "Riva Strategies",
-      "url": "https://YOURDOMAIN.com/",
-      "image": { "@id": "https://YOURDOMAIN.com/#primaryimage" },
-      "logo": { "@id": "https://YOURDOMAIN.com/#logo" },
+      "url": "https://rivastrategies.com/",
       "telephone": "+1-832-388-4600",
-      "priceRange": "$$$",
-      "parentOrganization": { "@id": "https://YOURDOMAIN.com/#organization" },
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "League City",
+        "addressRegion": "TX",
+        "postalCode": "77573",
         "addressCountry": "US"
-      }
+      },
+      "parentOrganization": { "@id": "https://rivastrategies.com/#organization" },
+      "areaServed": "US",
+      "priceRange": "$$"
+    },
+
+    {
+      "@type": "WebSite",
+      "@id": "https://rivastrategies.com/#website",
+      "url": "https://rivastrategies.com/",
+      "name": "Riva Strategies",
+      "publisher": { "@id": "https://rivastrategies.com/#organization" },
+      "inLanguage": "en"
+    },
+
+    {
+      "@type": "WebPage",
+      "@id": "https://rivastrategies.com/#webpage",
+      "url": "https://rivastrategies.com/",
+      "name": "Riva Strategies | Multi-Disciplinary Business Growth Partner",
+      "isPartOf": { "@id": "https://rivastrategies.com/#website" },
+      "about": { "@id": "https://rivastrategies.com/#organization" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "@id": "https://rivastrategies.com/#primaryimage",
+        "url": "https://rivastrategies.com/images/Untitled%20Design%20-%201%20-%20Edited.png"
+      },
+      "breadcrumb": { "@id": "https://rivastrategies.com/#breadcrumb" },
+      "inLanguage": "en"
+    },
+
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://rivastrategies.com/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://rivastrategies.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://rivastrategies.com/#services" },
+        { "@type": "ListItem", "position": 3, "name": "Industries", "item": "https://rivastrategies.com/#industries" },
+        { "@type": "ListItem", "position": 4, "name": "Contact", "item": "https://rivastrategies.com/#contact" }
+      ]
+    },
+
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://rivastrategies.com/#offer-catalog",
+      "name": "Riva Strategies Services",
+      "provider": { "@id": "https://rivastrategies.com/#organization" },
+      "itemListElement": [
+        { "@id": "https://rivastrategies.com/#service-revenue-systems" },
+        { "@id": "https://rivastrategies.com/#service-operational-efficiency" },
+        { "@id": "https://rivastrategies.com/#service-strategic-planning" },
+        { "@id": "https://rivastrategies.com/#service-team-performance" }
+      ]
     },
 
     {
       "@type": "Service",
-      "@id": "https://YOURDOMAIN.com/#service-revenue-systems",
+      "@id": "https://rivastrategies.com/#service-revenue-systems",
       "name": "Revenue Systems",
       "serviceType": "Revenue operations and growth systems",
-      "provider": { "@id": "https://YOURDOMAIN.com/#organization" },
+      "provider": { "@id": "https://rivastrategies.com/#organization" },
       "areaServed": "US",
-      "description": "Predictable sales and marketing systems: CRM automation, lead scoring, authority funnels, paid acquisition, referral and retention loops.",
+      "description": "Predictable sales and marketing systems including CRM automation, lead scoring, authority-driven funnels, paid acquisition, and referral/retention loops.",
       "offers": {
         "@type": "Offer",
         "name": "Revenue Systems Audit",
+        "url": "https://rivastrategies.com/#contact",
         "availability": "https://schema.org/InStock",
-        "url": "https://YOURDOMAIN.com/#contact",
         "priceCurrency": "USD"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://YOURDOMAIN.com/#service-operational-efficiency",
+      "@id": "https://rivastrategies.com/#service-operational-efficiency",
       "name": "Operational Efficiency",
       "serviceType": "Operational excellence and workflow automation",
-      "provider": { "@id": "https://YOURDOMAIN.com/#organization" },
+      "provider": { "@id": "https://rivastrategies.com/#organization" },
       "areaServed": "US",
-      "description": "Workflow mapping, tech stack optimization, SOP documentation, training protocols, unit economics and margin visibility.",
+      "description": "Workflow mapping, tech stack optimization, SOP documentation, training protocols, and unit economics/margin visibility.",
       "offers": {
         "@type": "Offer",
         "name": "Operational Efficiency Audit",
+        "url": "https://rivastrategies.com/#contact",
         "availability": "https://schema.org/InStock",
-        "url": "https://YOURDOMAIN.com/#contact",
         "priceCurrency": "USD"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://YOURDOMAIN.com/#service-strategic-planning",
+      "@id": "https://rivastrategies.com/#service-strategic-planning",
       "name": "Strategic Planning",
-      "serviceType": "Strategic roadmap and financial modeling",
-      "provider": { "@id": "https://YOURDOMAIN.com/#organization" },
+      "serviceType": "Strategic roadmaps and financial modeling",
+      "provider": { "@id": "https://rivastrategies.com/#organization" },
       "areaServed": "US",
-      "description": "Competitive analysis, 3-year financial modeling, quarterly execution frameworks, succession and exit readiness planning.",
+      "description": "Data-driven strategic planning including competitive analysis, multi-year financial modeling, quarterly execution frameworks, and exit readiness planning.",
       "offers": {
         "@type": "Offer",
         "name": "Strategic Planning Audit",
+        "url": "https://rivastrategies.com/#contact",
         "availability": "https://schema.org/InStock",
-        "url": "https://YOURDOMAIN.com/#contact",
         "priceCurrency": "USD"
       }
     },
     {
       "@type": "Service",
-      "@id": "https://YOURDOMAIN.com/#service-team-performance",
+      "@id": "https://rivastrategies.com/#service-team-performance",
       "name": "Team Performance",
       "serviceType": "Leadership, incentives, and KPI systems",
-      "provider": { "@id": "https://YOURDOMAIN.com/#organization" },
+      "provider": { "@id": "https://rivastrategies.com/#organization" },
       "areaServed": "US",
-      "description": "KPI dashboards, incentive and compensation design, leadership coaching, accountability systems, predictable talent acquisition.",
+      "description": "KPI dashboards, incentive/comp design, leadership coaching, accountability rhythms, and predictable talent acquisition systems.",
       "offers": {
         "@type": "Offer",
         "name": "Team Performance Audit",
+        "url": "https://rivastrategies.com/#contact",
         "availability": "https://schema.org/InStock",
-        "url": "https://YOURDOMAIN.com/#contact",
         "priceCurrency": "USD"
       }
     },
 
     {
       "@type": "ItemList",
-      "@id": "https://YOURDOMAIN.com/#industries",
+      "@id": "https://rivastrategies.com/#industries-served",
       "name": "Industries Served",
       "itemListOrder": "https://schema.org/ItemListOrderAscending",
       "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Hospitality & Food Service",
-            "url": "https://YOURDOMAIN.com/#industries/hospitality-food-service"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Local & Field Services",
-            "url": "https://YOURDOMAIN.com/#industries/local-field-services"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Professional Services",
-            "url": "https://YOURDOMAIN.com/#industries/professional-services"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Retail & E-Commerce",
-            "url": "https://YOURDOMAIN.com/#industries/retail-ecommerce"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Real Estate & Development",
-            "url": "https://YOURDOMAIN.com/#industries/real-estate-development"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Healthcare & Medical",
-            "url": "https://YOURDOMAIN.com/#industries/healthcare-medical"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 7,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Technology & Software",
-            "url": "https://YOURDOMAIN.com/#industries/technology-software"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 8,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Manufacturing & Logistics",
-            "url": "https://YOURDOMAIN.com/#industries/manufacturing-logistics"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 9,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Financial Services",
-            "url": "https://YOURDOMAIN.com/#industries/financial-services"
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 10,
-          "item": {
-            "@type": "DefinedTerm",
-            "name": "Non-Profit & Education",
-            "url": "https://YOURDOMAIN.com/#industries/non-profit-education"
-          }
-        }
-      ]
-    },
-
-    {
-      "@type": "FAQPage",
-      "@id": "https://YOURDOMAIN.com/#faq",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What does Riva Strategies do?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Riva Strategies helps operators build system-led businesses by installing revenue systems, operational efficiency frameworks, strategic plans, and performance-driven team structures."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who is a good fit to work with Riva Strategies?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Operators and leadership teams seeking scalable growth with clearer KPIs, improved margins, and reduced dependence on owner involvement."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do we start?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Start by requesting a Growth Audit / Strategy Audit through the contact form. A principal will follow up to confirm fit and next steps."
-          }
-        }
+        { "@type": "ListItem", "position": 1, "name": "Hospitality & Food Service", "url": "https://rivastrategies.com/#industries/hospitality-food-service" },
+        { "@type": "ListItem", "position": 2, "name": "Local & Field Services", "url": "https://rivastrategies.com/#industries/local-field-services" },
+        { "@type": "ListItem", "position": 3, "name": "Professional Services", "url": "https://rivastrategies.com/#industries/professional-services" },
+        { "@type": "ListItem", "position": 4, "name": "Retail & E-Commerce", "url": "https://rivastrategies.com/#industries/retail-ecommerce" },
+        { "@type": "ListItem", "position": 5, "name": "Real Estate & Development", "url": "https://rivastrategies.com/#industries/real-estate-development" },
+        { "@type": "ListItem", "position": 6, "name": "Healthcare & Medical", "url": "https://rivastrategies.com/#industries/healthcare-medical" },
+        { "@type": "ListItem", "position": 7, "name": "Technology & Software", "url": "https://rivastrategies.com/#industries/technology-software" },
+        { "@type": "ListItem", "position": 8, "name": "Manufacturing & Logistics", "url": "https://rivastrategies.com/#industries/manufacturing-logistics" },
+        { "@type": "ListItem", "position": 9, "name": "Financial Services", "url": "https://rivastrategies.com/#industries/financial-services" },
+        { "@type": "ListItem", "position": 10, "name": "Non-Profit & Education", "url": "https://rivastrategies.com/#industries/non-profit-education" }
       ]
     }
   ]
 }
 </script>
-
 
 <!DOCTYPE html>
 <html lang="en">
